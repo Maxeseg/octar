@@ -59,7 +59,6 @@ class HomeController extends Controller
 
     public function store(Request $request)
     {
-        dd('here');
         $this->validate($request,array(
             'name' => 'required|string',
             'acronym' => 'required|string',
