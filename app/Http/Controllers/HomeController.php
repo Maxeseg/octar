@@ -59,6 +59,7 @@ class HomeController extends Controller
 
     public function store(Request $request)
     {
+        dd('here');
         $this->validate($request,array(
             'name' => 'required|string',
             'acronym' => 'required|string',
@@ -88,7 +89,7 @@ class HomeController extends Controller
             'keywords' => 'required',
         ));
 
-//        dd($request->all());
+
 
         $trail = new Trails;
         $trail->user_id = auth()->user()->id;
@@ -121,12 +122,7 @@ class HomeController extends Controller
 
         $trail->study_types()->sync($request->study_type,false);
 
-//        for ($i=0;$i<sizeof($request->study_type);$i++){
-//            $type = new TrailType;
-//            $type->trial_id = $trail->id;
-//            $type->study_type_id = $request->study_type[$i];
-//            $type->save();
-//        }
+
 
 
 
