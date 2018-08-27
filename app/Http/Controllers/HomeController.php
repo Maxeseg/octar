@@ -59,7 +59,7 @@ class HomeController extends Controller
 
     public function store(Request $request)
     {
-        
+
         $this->validate($request,array(
             'name' => 'required|string',
             'acronym' => 'required|string',
@@ -212,7 +212,6 @@ class HomeController extends Controller
         else{
             $trail->sub_category = SubCategory::find($request->sub_category)->name;
         }
-        $trail->study_type = implode(' ',$request->study_type);
         $trail->blinding = $request->blinding;
         $trail->patient_profile = $request->patient_profile;
         $trail->description = $request->description;

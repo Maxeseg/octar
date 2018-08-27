@@ -80,7 +80,7 @@
                         <div class="col-md-4 col-sm-4 col-xs-12 lft">
                             <div class="form-group">
                                 <label>Trial Nb</label>
-                                <input name="nb" required class="form-control wdth" type="text" >
+                                <input name="nb" required class="form-control wdth" type="number" >
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-12 lft">
@@ -235,7 +235,7 @@
                                 <div data-role="dynamic-fields1">
                                     <div class="form-inline clearfix">
                                         <div class="rltv" >
-                                            <input name="figure_link[]" required class="form-control wd100" type="text" placeholder="Link" >
+                                            <input name="figure_link[]" required class="form-control wd100" type="url" placeholder="Link" >
                                             <textarea name="figure_description[]" required class="form-control wd100" placeholder="Description"></textarea>
                                         </div>
                                         <div class="add">
@@ -323,6 +323,15 @@
                 //get the selected value from A
                 var _val = this.options[this.selectedIndex].value;
 
+                var op = document.createElement('option');
+                //set its value
+                op.value = "non";
+                //set the display label
+                op.text = "Non";
+                //set the selected to true
+                op.selected = true;
+                //append it to B
+                B.appendChild(op);
 
                 for (var i in bOptions[_val]) {
                     //create option tag
@@ -335,13 +344,7 @@
                     B.appendChild(op);
                 }
                 //create SomeThing Else option tag
-                var op = document.createElement('option');
-                //set its value
-                op.value = "non";
-                //set the display label
-                op.text = "Something Else";
-                //append it to B
-                B.appendChild(op);
+
             };
             //fire this to update B on load
             A.onchange();

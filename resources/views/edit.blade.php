@@ -81,7 +81,7 @@
                         <div class="col-md-4 col-sm-4 col-xs-12 lft">
                             <div class="form-group">
                                 <label>Trial Nb</label>
-                                <input name="nb" value="{{$trail->nb}}" required class="form-control wdth" type="text" >
+                                <input name="nb" value="{{$trail->nb}}" required class="form-control wdth" type="number" >
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-12 lft">
@@ -279,7 +279,7 @@
                                     @foreach($trail->figures as $figure)
                                         <div class="form-inline clearfix">
                                             <div class="rltv" >
-                                                <input value="{{$figure->link}}" name="figure_link[]" required class="form-control wd100" type="text" placeholder="Link" >
+                                                <input value="{{$figure->link}}" name="figure_link[]" required class="form-control wd100" type="url" placeholder="Link" >
                                                 <textarea name="figure_description[]" required class="form-control wd100" placeholder="Description">{{$figure->description}}</textarea>
                                             </div>
                                             <div class="add">
@@ -406,7 +406,7 @@
                 //set its value
                 op.value = "non";
                 //set the display label
-                op.text = "Something Else";
+                op.text = "Non";
                 if(bool < 1){
                     op.selected = true;
                 }

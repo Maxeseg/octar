@@ -175,7 +175,7 @@
 
                             @foreach($trail->figures as $figure)
                                 <label style="text-align:left; font-weight:normal; width:100%">Link:</label>
-                                <span class="blu-txt ">{{$figure->link}}</span>
+                                <a class="blu-txt" href="{{$figure->link}}">Link</a>
 
                                 <label style="text-align:left; font-weight:normal; width:100%">Description:</label>
                                 <span class="blu-txt ">{{$figure->description}}</span>
