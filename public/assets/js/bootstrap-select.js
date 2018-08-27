@@ -377,8 +377,8 @@
     liveSearchStyle: 'contains',
     addResults: false,
     actionsBox: false,
-    iconBase: 'glyphicon',
-    tickIcon: 'glyphicon-ok',
+      iconBase: 'fa',
+      tickIcon: 'fa-check',
     showTick: false,
     template: {
       caret: '<span class="caret"></span>'

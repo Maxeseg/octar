@@ -94,13 +94,9 @@
                         <div class="col-md-6 col-sm-6 col-xs-12 lft">
                             <div class="form-group">
                                 <label>Trial Category</label>
-                                <select required name="category" class="form-control slct wdth">
+                                <select required name="category" id="A" class="form-control slct wdth">
                                     @foreach($categories as $category)
-                                        <optgroup label="{{$category->name}}">
-                                            @foreach($category->sub_categories as $sub_category)
-                                                <option @if($trail->sub_category == $sub_category->name) selected @endif value="{{$sub_category->id}}">{{$sub_category->name}}</option>
-                                            @endforeach
-                                        </optgroup>
+                                        <option @if($category->name == $trail->category) selected @endif value="{{$category->id}}">{{$category->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -108,10 +104,8 @@
                         <div class="col-md-6 col-sm-6 col-xs-12 lft">
                             <div class="form-group">
                                 <label>Sub Category</label>
-                                <select required name="sub_category" class="form-control slct wdth">
-                                    @foreach($subcategories as $subcategory)
-                                        <option  value="{{$subcategory->id}}">{{$subcategory->name}}</option>
-                                    @endforeach
+                                <select id="B" required name="sub_category" class="form-control slct wdth">
+
                                 </select>
                             </div>
                         </div>
@@ -364,5 +358,64 @@
     <script src="{{asset('assets/')}}/js/nested-form.js"></script>
     <script>
         $('.multipleSelect').fastselect();
+    </script>
+    <script>
+        (function() {
+
+            //setup an object fully of arrays
+            //alternativly it could be something like
+            //{"yes":[{value:sweet, text:Sweet}.....]}
+            //so you could set the label of the option tag something different than the name
+            var bOptions = {
+            };
+            @foreach($categories as $category)
+                bOptions[{!! $category->id !!}] = {!! $category->sub_categories !!}
+            @endforeach
+
+
+
+            var A = document.getElementById('A');
+            var B = document.getElementById('B');
+
+            //on change is a good event for this because you are guarenteed the value is different
+            A.onchange = function() {
+                //clear out B
+                B.length = 0;
+                //get the selected value from A
+                var _val = this.options[this.selectedIndex].value;
+
+                var bool = 0;
+                for (var i in bOptions[_val]) {
+                    //create option tag
+                    var op = document.createElement('option');
+                    //set its value
+                    op.value = bOptions[_val][i].id;
+                    //set the display label
+                    op.text = bOptions[_val][i].name;
+                    var temp = {!! json_encode($trail->sub_category ) !!}.toString();
+
+                    if( temp.includes(op.text) ){
+                        op.selected = true;
+                        bool = 1;
+                    }
+                    //append it to B
+                    B.appendChild(op);
+                }
+                //create SomeThing Else option tag
+                var op = document.createElement('option');
+                //set its value
+                op.value = "non";
+                //set the display label
+                op.text = "Something Else";
+                if(bool < 1){
+                    op.selected = true;
+                }
+                //append it to B
+                B.appendChild(op);
+            };
+            //fire this to update B on load
+            A.onchange();
+
+        })();
     </script>
 @endsection

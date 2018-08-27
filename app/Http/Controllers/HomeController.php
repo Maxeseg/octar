@@ -98,8 +98,13 @@ class HomeController extends Controller
         $trail->publication_year = $request->year;
         $trail->nb = $request->nb;
         $trail->octar_nb = $request->octar_nb;
-        $trail->category = SubCategory::find($request->category)->category->name;
-        $trail->sub_category = SubCategory::find($request->category)->name;
+        $trail->category = Category::find($request->category)->name;
+        if($request->sub_category == 'non'){
+            $trail->sub_category = '';
+        }
+        else{
+            $trail->sub_category = SubCategory::find($request->sub_category)->name;
+        }
         $trail->blinding = $request->blinding;
         $trail->patient_profile = $request->patient_profile;
         $trail->description = $request->description;
@@ -205,8 +210,12 @@ class HomeController extends Controller
         $trail->publication_year = $request->year;
         $trail->nb = $request->nb;
         $trail->octar_nb = $request->octar_nb;
-        $trail->category = SubCategory::find($request->category)->category->name;
-        $trail->sub_category = SubCategory::find($request->category)->name;
+        if($request->sub_category == 'non'){
+            $trail->sub_category = '';
+        }
+        else{
+            $trail->sub_category = SubCategory::find($request->sub_category)->name;
+        }
         $trail->study_type = implode(' ',$request->study_type);
         $trail->blinding = $request->blinding;
         $trail->patient_profile = $request->patient_profile;
