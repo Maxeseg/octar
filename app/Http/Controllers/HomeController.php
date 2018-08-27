@@ -59,35 +59,35 @@ class HomeController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
-        $this->validate($request,array(
-            'name' => 'required|string',
-            'acronym' => 'required|string',
-            'authors' => 'required|string',
-            'year' => 'required|string',
-            'nb' => 'required|string',
-            'octar_nb' => 'required|string',
-            'category' => 'required|string',
-            'sub_category' => 'required|string',
-            'study_type' => 'required',
-            'blinding' => 'required|string',
-            'patient_profile' => 'required|string',
-            'description' => 'required|string',
-            'arm_nb' => 'required',
-            'arm_name' => 'required',
-            'arm_description' => 'required',
-            'cross_over' => 'required|string',
-            'randomization' => 'required|string',
-            'endpoint_type' => 'required|string',
-            'endpoint_result' => 'required|string',
-            'statistical_significance' => 'required|string',
-            'previous_lines' => 'required|string',
-            'points_of_criticism' => 'required|string',
-            'link_to_text' => 'required|string',
-            'figure_link' => 'required',
-            'figure_description' => 'required',
-            'keywords' => 'required',
-        ));
+//        dd($request->all());
+//        $this->validate($request,array(
+//            'name' => 'required|string',
+//            'acronym' => 'required|string',
+//            'authors' => 'required|string',
+//            'year' => 'required|string',
+//            'nb' => 'required|string',
+//            'octar_nb' => 'required|string',
+//            'category' => 'required|string',
+//            'sub_category' => 'required|string',
+//            'study_type' => 'required',
+//            'blinding' => 'required|string',
+//            'patient_profile' => 'required|string',
+//            'description' => 'required|string',
+//            'arm_nb' => 'required',
+//            'arm_name' => 'required',
+//            'arm_description' => 'required',
+//            'cross_over' => 'required|string',
+//            'randomization' => 'required|string',
+//            'endpoint_type' => 'required|string',
+//            'endpoint_result' => 'required|string',
+//            'statistical_significance' => 'required|string',
+//            'previous_lines' => 'required|string',
+//            'points_of_criticism' => 'required|string',
+//            'link_to_text' => 'required|string',
+//            'figure_link' => 'required',
+//            'figure_description' => 'required',
+//            'keywords' => 'required',
+//        ));
 
 
 
