@@ -1,5 +1,6 @@
 # octar
 Octar is a simple medical applications demo
-for testing use
-username:maxes@maxes.net
-password:123456
+<br>
+for testing use<br>
+username: maxes@maxes.net<br>
+password: 123456
