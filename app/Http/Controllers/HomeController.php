@@ -89,7 +89,6 @@ class HomeController extends Controller
 //        ));
 
 
-
         $trail = new Trails;
         $trail->user_id = auth()->user()->id;
         $trail->name = $request->name;
@@ -144,14 +143,16 @@ class HomeController extends Controller
             $figure->description = $request->figure_description[$i];
             $figure->save();
         }
-
-        for ($i=0;$i<sizeof($request->keywords);$i++){
-            $keyword = new Keyword;
-            $keyword->trials_id = $trail->id;
-            $keyword->name = $request->keywords[$i];
-            $keyword->save();
+        
+        if($request->keywords){
+            for ($i=0;$i<sizeof($request->keywords);$i++){
+                $keyword = new Keyword;
+                $keyword->trials_id = $trail->id;
+                $keyword->name = $request->keywords[$i];
+                $keyword->save();
+            }    
         }
-
+        
         Session::flash('success','Trial Added Successfully');
         return redirect(route('home'));
 

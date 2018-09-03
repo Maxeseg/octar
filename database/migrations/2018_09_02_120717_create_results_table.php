@@ -16,9 +16,9 @@ class CreateResultsTable extends Migration
         Schema::create('results', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('trail_id')->unsigned();
-            $table->string('endpoint_type');
-            $table->string('endpoint_result');
-            $table->string('statistical_significance');
+            $table->string('endpoint_type')->nullable();
+            $table->string('endpoint_result')->nullable();
+            $table->string('statistical_significance')->nullable();
             $table->foreign('trail_id')->references('id')->on('trials')->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();
