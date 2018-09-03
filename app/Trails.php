@@ -13,6 +13,10 @@ class Trails extends Model
         return $this->hasMany(Arm::class,'trials_id','id');
     }
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+    
     public function results(){
         return $this->hasMany(Result::class,'trail_id','id');
     }

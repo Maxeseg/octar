@@ -35,16 +35,18 @@
                         <div class="trial">
                             <a href="{{url('/home/'.$trail->id)}}">
                                 <h4>{{$trail->name}}</h4>
-                                <p>By: {{auth()->user()->name}}</p>
+                                <p>By: {{$trail->user->name}}</p>
                                 <p>{{$trail->created_at->format('d/m/Y')}}</p>
                             </a>
                             <div class="links">
                                 <a href="{{route('home.edit',$trail->id)}}" class="edit"><img src="{{asset("assets/")}}/img/edit.png"></a>
+                                @if(Auth::user()->id == $trail->user_id)
                                 <form action="{{route('home.delete',$trail->id)}}" method="POST" id="Form.{{$trail->id}}">
                                     @csrf
                                     {{ method_field('DELETE') }}
                                     <a href="#squarespaceModal-8"  data-toggle="modal" class="delet"><img src="{{asset("assets/")}}/img/delt.png" ></a>
                                 </form>
+                                @endif
                             </div>
                         </div>
                     </div>
