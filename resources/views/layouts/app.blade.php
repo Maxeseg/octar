@@ -7,6 +7,7 @@
     <link rel="stylesheet"  href="{{asset("assets/")}}/css/bootstrap.css"  type="text/css"/>
     <link rel="stylesheet"  href="{{asset("assets/")}}/css/style.css"  type="text/css"/>
     <link href="{{asset("assets/")}}/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset("assets/")}}/css/fastselect.css">
     @yield('css')
 </head>
 <body>

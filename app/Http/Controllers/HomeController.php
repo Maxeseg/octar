@@ -60,34 +60,6 @@ class HomeController extends Controller
     public function store(Request $request)
     {
 
-//        $this->validate($request,array(
-//            'name' => 'string',
-//            'acronym' => 'string',
-//            'authors' => 'string',
-//            'nb' => 'string',
-//            'year' => 'max:4',
-//            'octar_nb' => 'string',
-//            'category' => 'string',
-//            'sub_category' => 'string',
-//            'blinding' => 'string',
-//            'patient_profile' => 'string',
-//            'description' => 'string',
-//            'arm_nb' => 'required',
-//            'arm_name' => 'required',
-//            'arm_description' => 'required',
-//            'cross_over' => 'string',
-//            'randomization' => 'string',
-//            'endpoint_type' => 'string',
-//            'endpoint_result' => 'string',
-//            'statistical_significance' => 'string',
-//            'previous_lines' => 'string',
-//            'points_of_criticism' => 'string',
-//            'link_to_text' => 'string',
-//            'figure_link' => 'required',
-//            'figure_description' => 'required',
-//            'keywords' => 'required',
-//        ));
-
 
         $trail = new Trails;
         $trail->user_id = auth()->user()->id;
@@ -172,34 +144,6 @@ class HomeController extends Controller
 
     public function update(Request $request,$id)
     {
-//        $this->validate($request,array(
-//            'name' => 'required|string',
-//            'acronym' => 'required|string',
-//            'authors' => 'required|string',
-//            'year' => 'required|string',
-//            'nb' => 'required|string',
-//            'octar_nb' => 'required|string',
-//            'category' => 'required|string',
-//            'sub_category' => 'required|string',
-//            'study_type' => 'required',
-//            'blinding' => 'required|string',
-//            'patient_profile' => 'required|string',
-//            'description' => 'required|string',
-//            'arm_nb' => 'required',
-//            'arm_name' => 'required',
-//            'arm_description' => 'required',
-//            'cross_over' => 'required|string',
-//            'randomization' => 'required|string',
-//            'endpoint_type' => 'required|string',
-//            'endpoint_result' => 'required|string',
-//            'statistical_significance' => 'required|string',
-//            'previous_lines' => 'required|string',
-//            'points_of_criticism' => 'required|string',
-//            'link_to_text' => 'required|string',
-//            'figure_link' => 'required',
-//            'figure_description' => 'required',
-//            'keywords' => 'required',
-//        ));
 
         $trail = Trails::find($id);
         $trail->user_id = auth()->user()->id;
@@ -272,11 +216,13 @@ class HomeController extends Controller
             $figure->save();
         }
 
-        for ($i=0;$i<sizeof($request->keywords);$i++){
-            $keyword = new Keyword;
-            $keyword->trials_id = $trail->id;
-            $keyword->name = $request->keywords[$i];
-            $keyword->save();
+        if($request->keywords){
+            for ($i=0;$i<sizeof($request->keywords);$i++){
+                $keyword = new Keyword;
+                $keyword->trials_id = $trail->id;
+                $keyword->name = $request->keywords[$i];
+                $keyword->save();
+            }    
         }
         Session::flash('success','Trial Updated Successfully');
         return redirect(route('home'));

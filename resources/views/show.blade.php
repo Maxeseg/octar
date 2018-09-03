@@ -47,7 +47,7 @@
                     </div>
                     <div class="col-md-12 col-sm-12 col-xs-12 lft">
                         <h6>Authors: </h6>
-                        <p class="blu-txt nw-wdth1">{{$trail->author == null ? 'Not Defiend' : $trail->author}}</p>
+                        <p class="blu-txt nw-wdth1">{{$trail->authors == null ? 'Not Defiend' : $trail->authors}}</p>
                     </div>
 
                     <div class="clearfix"></div>
@@ -219,9 +219,13 @@
                         <div class="form-group" >
                             <label>Keywords</label>
                             <div class="wdth no-bord">
-                                @foreach($trail->keywords as $keyword)
-                                    <div class="fstChoiceItem pdd bluu">{{$keyword->name}}</div>
-                                @endforeach
+                            @if(count($trail->keywords) == 0)
+                             <span class="blu-txt ">Not Defiend</span>
+                                @else
+                                    @foreach($trail->keywords as $keyword)
+                                        <div class="fstChoiceItem pdd bluu">{{$keyword->name}}</div>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
 
