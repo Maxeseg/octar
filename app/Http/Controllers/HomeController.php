@@ -8,10 +8,10 @@ use App\Category;
 use App\EndPoint;
 use App\Keyword;
 use App\RelevantFigure;
+use App\Result;
 use App\StudyType;
 use App\SubCategory;
 use App\Trails;
-use App\TrailType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Session;
@@ -35,7 +35,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $trails = Trails::where('user_id',auth()->user()->id)->paginate(8);
+        $trails = Trails::paginate(8);
         return view('home',compact('trails'));
     }
 
@@ -48,7 +48,7 @@ class HomeController extends Controller
     public function create()
     {
         $nb = Carbon::now()->timestamp;
-        $categories = Category::all();
+        $categories = Category::orderBy('name','asc')->get();
         $subcategories = SubCategory::all();
         $endpoints = EndPoint::all();
         $blinding = Blinding::all();
@@ -60,34 +60,33 @@ class HomeController extends Controller
     public function store(Request $request)
     {
 
-        $this->validate($request,array(
-            'name' => 'required|string',
-            'acronym' => 'required|string',
-            'authors' => 'required|string',
-            'year' => 'required|string',
-            'nb' => 'required|string',
-            'octar_nb' => 'required|string',
-            'category' => 'required|string',
-            'sub_category' => 'required|string',
-            'study_type' => 'required',
-            'blinding' => 'required|string',
-            'patient_profile' => 'required|string',
-            'description' => 'required|string',
-            'arm_nb' => 'required',
-            'arm_name' => 'required',
-            'arm_description' => 'required',
-            'cross_over' => 'required|string',
-            'randomization' => 'required|string',
-            'endpoint_type' => 'required|string',
-            'endpoint_result' => 'required|string',
-            'statistical_significance' => 'required|string',
-            'previous_lines' => 'required|string',
-            'points_of_criticism' => 'required|string',
-            'link_to_text' => 'required|string',
-            'figure_link' => 'required',
-            'figure_description' => 'required',
-            'keywords' => 'required',
-        ));
+//        $this->validate($request,array(
+//            'name' => 'string',
+//            'acronym' => 'string',
+//            'authors' => 'string',
+//            'nb' => 'string',
+//            'year' => 'max:4',
+//            'octar_nb' => 'string',
+//            'category' => 'string',
+//            'sub_category' => 'string',
+//            'blinding' => 'string',
+//            'patient_profile' => 'string',
+//            'description' => 'string',
+//            'arm_nb' => 'required',
+//            'arm_name' => 'required',
+//            'arm_description' => 'required',
+//            'cross_over' => 'string',
+//            'randomization' => 'string',
+//            'endpoint_type' => 'string',
+//            'endpoint_result' => 'string',
+//            'statistical_significance' => 'string',
+//            'previous_lines' => 'string',
+//            'points_of_criticism' => 'string',
+//            'link_to_text' => 'string',
+//            'figure_link' => 'required',
+//            'figure_description' => 'required',
+//            'keywords' => 'required',
+//        ));
 
 
 
@@ -111,9 +110,6 @@ class HomeController extends Controller
         $trail->description = $request->description;
         $trail->cross_over = $request->cross_over;
         $trail->Second_randomization = $request->randomization;
-        $trail->endpoint_type = $request->endpoint_type;
-        $trail->endpoint_result = $request->endpoint_result;
-        $trail->statistical_significance = $request->statistical_significance;
         $trail->previous_lines = $request->previous_lines;
         $trail->points_of_criticism = $request->points_of_criticism;
         $trail->link_to_text = $request->link_to_text;
@@ -122,8 +118,14 @@ class HomeController extends Controller
 
         $trail->study_types()->sync($request->study_type,false);
 
-
-
+        for ($i=0;$i<sizeof($request->endpoint_type);$i++){
+            $arm = new Result;
+            $arm->trail_id = $trail->id;
+            $arm->endpoint_type = $request->endpoint_type[$i];
+            $arm->endpoint_result = $request->endpoint_result[$i];
+            $arm->statistical_significance = $request->statistical_significance[$i];
+            $arm->save();
+        }
 
 
         for ($i=0;$i<sizeof($request->arm_nb);$i++){
@@ -158,7 +160,7 @@ class HomeController extends Controller
     public function edit($id)
     {
         $trail = Trails::find($id);
-        $categories = Category::all();
+        $categories = Category::orderBy('name','asc')->get();
         $subcategories = SubCategory::all();
         $endpoints = EndPoint::all();
         $blinding = Blinding::all();
@@ -169,34 +171,34 @@ class HomeController extends Controller
 
     public function update(Request $request,$id)
     {
-        $this->validate($request,array(
-            'name' => 'required|string',
-            'acronym' => 'required|string',
-            'authors' => 'required|string',
-            'year' => 'required|string',
-            'nb' => 'required|string',
-            'octar_nb' => 'required|string',
-            'category' => 'required|string',
-            'sub_category' => 'required|string',
-            'study_type' => 'required',
-            'blinding' => 'required|string',
-            'patient_profile' => 'required|string',
-            'description' => 'required|string',
-            'arm_nb' => 'required',
-            'arm_name' => 'required',
-            'arm_description' => 'required',
-            'cross_over' => 'required|string',
-            'randomization' => 'required|string',
-            'endpoint_type' => 'required|string',
-            'endpoint_result' => 'required|string',
-            'statistical_significance' => 'required|string',
-            'previous_lines' => 'required|string',
-            'points_of_criticism' => 'required|string',
-            'link_to_text' => 'required|string',
-            'figure_link' => 'required',
-            'figure_description' => 'required',
-            'keywords' => 'required',
-        ));
+//        $this->validate($request,array(
+//            'name' => 'required|string',
+//            'acronym' => 'required|string',
+//            'authors' => 'required|string',
+//            'year' => 'required|string',
+//            'nb' => 'required|string',
+//            'octar_nb' => 'required|string',
+//            'category' => 'required|string',
+//            'sub_category' => 'required|string',
+//            'study_type' => 'required',
+//            'blinding' => 'required|string',
+//            'patient_profile' => 'required|string',
+//            'description' => 'required|string',
+//            'arm_nb' => 'required',
+//            'arm_name' => 'required',
+//            'arm_description' => 'required',
+//            'cross_over' => 'required|string',
+//            'randomization' => 'required|string',
+//            'endpoint_type' => 'required|string',
+//            'endpoint_result' => 'required|string',
+//            'statistical_significance' => 'required|string',
+//            'previous_lines' => 'required|string',
+//            'points_of_criticism' => 'required|string',
+//            'link_to_text' => 'required|string',
+//            'figure_link' => 'required',
+//            'figure_description' => 'required',
+//            'keywords' => 'required',
+//        ));
 
         $trail = Trails::find($id);
         $trail->user_id = auth()->user()->id;
@@ -217,9 +219,6 @@ class HomeController extends Controller
         $trail->description = $request->description;
         $trail->cross_over = $request->cross_over;
         $trail->Second_randomization = $request->randomization;
-        $trail->endpoint_type = $request->endpoint_type;
-        $trail->endpoint_result = $request->endpoint_result;
-        $trail->statistical_significance = $request->statistical_significance;
         $trail->previous_lines = $request->previous_lines;
         $trail->points_of_criticism = $request->points_of_criticism;
         $trail->link_to_text = $request->link_to_text;
@@ -228,6 +227,10 @@ class HomeController extends Controller
 
         for ($i=0;$i<count($trail->arms);$i++){
             Arm::destroy($trail->arms[$i]->id);
+        }
+
+        for ($i=0;$i<count($trail->results);$i++){
+            Result::destroy($trail->results[$i]->id);
         }
 
         for ($i=0;$i<count($trail->figures);$i++){
@@ -241,6 +244,15 @@ class HomeController extends Controller
 
         $trail->study_types()->sync($request->study_type,false);
 
+
+        for ($i=0;$i<sizeof($request->endpoint_type);$i++){
+            $arm = new Result;
+            $arm->trail_id = $trail->id;
+            $arm->endpoint_type = $request->endpoint_type[$i];
+            $arm->endpoint_result = $request->endpoint_result[$i];
+            $arm->statistical_significance = $request->statistical_significance[$i];
+            $arm->save();
+        }
 
         for ($i=0;$i<sizeof($request->arm_nb);$i++){
             $arm = new Arm;

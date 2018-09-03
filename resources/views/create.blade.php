@@ -48,39 +48,34 @@
                         <div class="col-md-6 col-sm-6 col-xs-12 lft">
                             <div class="form-group">
                                 <label>Trial Name</label>
-                                <input name="name" required class="form-control wdth" type="text" >
+                                <input name="name"   class="form-control wdth" type="text" >
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-12 lft">
                             <div class="form-group">
                                 <label>Trial Acronym</label>
-                                <input name="acronym" required class="form-control wdth" type="text" >
+                                <input name="acronym"   class="form-control wdth" type="text" >
                             </div>
                         </div>
                         <div class="clearfix"></div>
                         <div class="col-md-12 col-sm-12 col-xs-12 rght">
                             <div class="form-group">
                                 <label class="wdth1">Authors</label>
-                                <input name="authors" required class="form-control wdth2" type="text" >
+                                <input name="authors"   class="form-control wdth2" type="text" >
                             </div>
                         </div>
                         <div class="clearfix"></div>
                         <div class="col-md-4 col-sm-4 col-xs-12 lft">
                             <div class="form-group">
                                 <label class="wdth3">Year of publication</label>
-                                <select required name="year" class="form-control slct wdth4">
-                                    <option value="2015">2015</option>
-                                    <option value="2016">2016</option>
-                                    <option value="2017">2017</option>
-                                    <option value="2018">2018</option>
-                                    <option value="2019">2019</option>
-                                </select>
+                                <input name="year"   class="form-control wdth4" type="number" maxlength="4">
+
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-12 lft">
                             <div class="form-group">
                                 <label>Trial Nb</label>
-                                <input name="nb" required class="form-control wdth" type="number" >
+                                <input name="nb"   class="form-control wdth" type="text" >
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-12 lft">
@@ -93,7 +88,7 @@
                         <div class="col-md-6 col-sm-6 col-xs-12 lft">
                             <div class="form-group">
                                 <label>Trial Category</label>
-                                <select required name="category" id="A" class="form-control slct wdth">
+                                <select   name="category" id="A" class="form-control slct wdth">
                                     @foreach($categories as $category)
                                         <option value="{{$category->id}}">{{$category->name}}</option>
                                     @endforeach
@@ -103,7 +98,7 @@
                         <div class="col-md-6 col-sm-6 col-xs-12 lft">
                             <div class="form-group">
                                 <label>Sub Category</label>
-                                <select id="B" required name="sub_category" class="form-control slct wdth">
+                                <select id="B"   name="sub_category" class="form-control slct wdth">
 
                                 </select>
                             </div>
@@ -113,7 +108,7 @@
                         <div class="col-md-6 col-sm-6 col-xs-12 lft">
                             <div class="form-group">
                                 <label>Study type</label>
-                                <select required name="study_type[]" id="maxOption2" class="selectpicker slct wdth form-control" multiple data-max-options="10">
+                                <select   name="study_type[]" id="maxOption2" class="selectpicker slct wdth form-control" multiple data-max-options="10">
                                     @foreach($study_types as $study_type)
                                         <option value="{{$study_type->id}}">{{$study_type->name}}</option>
                                     @endforeach
@@ -139,13 +134,13 @@
                             <div class="clearfix"></div>
                             <div class="form-group">
                                 <label>Patient profile</label>
-                                <input name="patient_profile" required class="form-control wdth" type="text" >
+                                <textarea name="patient_profile"   class="form-control wdth"></textarea>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-12 lft">
                             <div class="form-group">
                                 <label>Trial description</label>
-                                <textarea name="description" required class="form-control wdth"></textarea>
+                                <textarea name="description"   class="form-control wdth"></textarea>
 
                             </div>
                         </div>
@@ -156,9 +151,9 @@
                                 <div data-role="dynamic-fields">
                                     <div class="form-inline clearfix">
                                         <div class="rltv" >
-                                            <input name="arm_nb[]" required class="form-control wd100" type="text" placeholder="Arm Nb" >
-                                            <input name="arm_name[]" required class="form-control wd100" type="text" placeholder="Arm Name" >
-                                            <textarea name="arm_description[]" required class="form-control wd100" placeholder="Description"></textarea>
+                                            <input name="arm_nb[]"   class="form-control wd100" type="text" placeholder="Arm Nb" >
+                                            <input name="arm_name[]"   class="form-control wd100" type="text" placeholder="Arm Name" >
+                                            <textarea name="arm_description[]"   class="form-control wd100" placeholder="Description"></textarea>
                                         </div>
                                         <div class="add">
                                             <button class="btn cancl" data-role="remove"><img src="{{asset('assets/')}}/img/minus.png"></button>
@@ -173,20 +168,20 @@
                                 <label id="lbl-wdth">Cross Over</label>
                                 <div class="nw-wdth2">
                                     <label style="width:85px">
-                                        <input type="radio" name="cross_over" required value="Yes" id="randomization_0">
+                                        <input type="radio" name="cross_over"   value="Yes" id="randomization_0">
                                         Yes</label>
                                     <label style="width:85px">
-                                        <input type="radio" name="cross_over"required value="No" id="randomization_1">
+                                        <input type="radio" name="cross_over"  value="No" id="randomization_1">
                                         No</label>
                                 </div>
 
                                 <label id="lbl-wdth"> Second randomization</label>
                                 <div class="nw-wdth2">
                                     <label style="width:85px">
-                                        <input type="radio" name="randomization" required value="Yes" id="randomization_0">
+                                        <input type="radio" name="randomization"   value="Yes" id="randomization_0">
                                         Yes</label>
                                     <label style="width:85px">
-                                        <input type="radio" name="randomization" required value="No" id="randomization_1">
+                                        <input type="radio" name="randomization"   value="No" id="randomization_1">
                                         No</label>
                                 </div>
                             </div>
@@ -195,36 +190,43 @@
                         <div class="col-md-6 col-sm-6 col-xs-12 lft">
                             <label>Results</label>
                             <div class="wdth">
-                                <select name="endpoint_type" required class="form-control slct" style="width:100%; margin-bottom:5px">
-                                    @foreach($endpoints as $endpoint)
-                                        <option value="{{$endpoint->id}}">{{$endpoint->name}}</option>
-                                    @endforeach
-                                </select>
+                                <div data-role="dynamic-fields">
+                                    <div class="form-inline clearfix">
+                                        <div class="rltv" >
+                                            <select name="endpoint_type[]"   class="form-control slct" style="width:100%; margin-bottom:5px">
+                                                @foreach($endpoints as $endpoint)
+                                                    <option value="{{$endpoint->id}}">{{$endpoint->name}}</option>
+                                                @endforeach
+                                            </select>
 
-                                <input name="endpoint_result" required class="form-control wd100" type="text" placeholder="Endpoint result" >
-                                <div  class="form-group">
-                                    <p>Statistical Significance</p>
+                                            <input name="endpoint_result[]" class="form-control wd100" type="text" placeholder="Endpoint result" >
+                                            <div  class="form-group">
+                                                <p style="margin-left: 67px;">Statistical Significance</p>
+                                            </div>
+                                            <p class="text-center">
+                                                <select name="statistical_significance[]" style="width: 100%" class="form-control slct wdth">
+                                                    <option value="Significant">Significant</option>
+                                                    <option value="Non Significant">Non Significant</option>
+                                                </select>
+                                                <br>
+                                            </p>
+                                        </div>
+                                        <div class="add">
+                                            <button class="btn cancl" data-role="remove"><img src="{{asset('assets/')}}/img/minus.png"></button>
+                                            <button class="btn adme" data-role="add"><img src="{{asset('assets/')}}/img/pluss.png"></button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <p class="text-center">
-                                    <label style="text-align:center; width:48%">
-                                        <input type="radio" required name="statistical_significance" value="Significant" id="randomization_0">
-                                        Significant</label>
-                                    <label style="text-align:center; width:48%">
-                                        <input type="radio" required name="statistical_significance" value="Non" id="randomization_1">
-                                        Non</label>
-                                    <br>
-                                </p>
                             </div>
-
                         </div>
                         <div class="col-md-5 col-sm-5 col-xs-12 lft pull-right">
                             <div class="form-group">
                                 <p style="text-align:left">Previous lines / after failure of</p>
-                                <input name="previous_lines" required class="form-control " type="text" >
+                                <input name="previous_lines"   class="form-control " type="text" >
                                 <p style="text-align:left">Points of criticism</p>
-                                <input name="points_of_criticism" required class="form-control " type="text" >
+                                <textarea name="points_of_criticism"   class="form-control wd100" ></textarea>
                                 <p style="text-align:left">Link to full text</p>
-                                <input name="link_to_text" required class="form-control " type="text" >
+                                <input name="link_to_text"   class="form-control " type="url" >
                             </div>
                         </div>
 
@@ -235,8 +237,8 @@
                                 <div data-role="dynamic-fields1">
                                     <div class="form-inline clearfix">
                                         <div class="rltv" >
-                                            <input name="figure_link[]" required class="form-control wd100" type="url" placeholder="Link" >
-                                            <textarea name="figure_description[]" required class="form-control wd100" placeholder="Description"></textarea>
+                                            <input name="figure_link[]" class="form-control wd100" type="url" placeholder="Link" >
+                                            <textarea name="figure_description[]"   class="form-control wd100" placeholder="Description"></textarea>
                                         </div>
                                         <div class="add">
                                             <button class="btn cancl" data-role="remove"><img src="{{asset('assets/')}}/img/minus.png"></button>
@@ -254,7 +256,7 @@
                         <div class="col-md-6 col-sm-6 col-xs-12 lft">
                             <div class="form-group" >
                                 <label>Keywords</label>
-                                <select class="multipleSelect form-control slct wdth" multiple name="keywords[]" required >
+                                <select class="multipleSelect form-control slct wdth" multiple name="keywords[]"   >
                                     <option value="Afghanistan">Afghanistan</option>
                                     <option value="Albania">Albania</option>
                                     <option value="Algeria">Algeria</option>
@@ -344,8 +346,8 @@
                     B.appendChild(op);
                 }
                 //create SomeThing Else option tag
-
             };
+
             //fire this to update B on load
             A.onchange();
 

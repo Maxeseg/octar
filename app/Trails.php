@@ -13,6 +13,10 @@ class Trails extends Model
         return $this->hasMany(Arm::class,'trials_id','id');
     }
 
+    public function results(){
+        return $this->hasMany(Result::class,'trail_id','id');
+    }
+
     public function figures(){
         return $this->hasMany(RelevantFigure::class,'trials_id','id');
     }
@@ -37,9 +41,7 @@ class Trails extends Model
         return $this->hasOne(Blinding::class,'id','blinding');
     }
 
-    public function end_point(){
-        return $this->hasOne(EndPoint::class,'id','endpoint_type');
-    }
+
 
 
 }

@@ -16,9 +16,9 @@ class CreateArmsTable extends Migration
         Schema::create('arms', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('trials_id')->unsigned();
-            $table->string('nb');
-            $table->string('name');
-            $table->text('description');
+            $table->string('nb')->nullable();
+            $table->string('name')->nullable();
+            $table->text('description')->nullable();
             $table->foreign('trials_id')->references('id')->on('trials')->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();

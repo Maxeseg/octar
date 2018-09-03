@@ -15,7 +15,7 @@ class CreateKeywordsTable extends Migration
     {
         Schema::create('keywords', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->integer('trials_id')->unsigned();
             $table->foreign('trials_id')->references('id')->on('trials')->onDelete('cascade')->onUpdate('cascade');
 

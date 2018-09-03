@@ -16,8 +16,8 @@ class CreateRelevantFiguresTable extends Migration
         Schema::create('relevant_figures', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('trials_id')->unsigned();
-            $table->string('link');
-            $table->text('description');
+            $table->string('link')->nullable();
+            $table->text('description')->nullable();
             $table->foreign('trials_id')->references('id')->on('trials')->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();

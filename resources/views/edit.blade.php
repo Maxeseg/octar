@@ -69,19 +69,13 @@
                         <div class="col-md-4 col-sm-4 col-xs-12 lft">
                             <div class="form-group">
                                 <label class="wdth3">Year of publication</label>
-                                <select required name="year" class="form-control slct wdth4">
-                                    <option @if($trail->publication_year == 2015) selected @endif value="2015">2015</option>
-                                    <option @if($trail->publication_year == 2016) selected @endif value="2016">2016</option>
-                                    <option @if($trail->publication_year == 2017) selected @endif value="2017">2017</option>
-                                    <option @if($trail->publication_year == 2018) selected @endif value="2018">2018</option>
-                                    <option @if($trail->publication_year == 2019) selected @endif value="2019">2019</option>
-                                </select>
+                                <input name="year" value="{{$trail->year}}" required class="form-control wdth4" type="number" maxlength="4" >
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-12 lft">
                             <div class="form-group">
                                 <label>Trial Nb</label>
-                                <input name="nb" value="{{$trail->nb}}" required class="form-control wdth" type="number" >
+                                <input name="nb" value="{{$trail->nb}}" required class="form-control wdth" type="text" >
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-12 lft">
@@ -150,7 +144,7 @@
                             <div class="clearfix"></div>
                             <div class="form-group">
                                 <label>Patient profile</label>
-                                <input name="patient_profile"  value="{{$trail->patient_profile}}" required class="form-control wdth" type="text" >
+                                <textarea name="patient_profile"   class="form-control wdth">{{$trail->patient_profile}}</textarea>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-12 lft">
@@ -228,35 +222,25 @@
                         <div class="col-md-6 col-sm-6 col-xs-12 lft">
                             <label>Results</label>
                             <div class="wdth">
-                                <select name="endpoint_type" required class="form-control slct" style="width:100%; margin-bottom:5px">
-                                    @foreach($endpoints as $endpoint)
-                                        <option @if($trail->endpoint_type == $endpoint->id) selected @endif value="{{$endpoint->id}}">{{$endpoint->name}}</option>
-                                    @endforeach
-                                </select>
+                                @foreach($trail->results as $result)
+                                    <select name="endpoint_type" required class="form-control slct" style="width:100%; margin-bottom:5px">
+                                        @foreach($endpoints as $endpoint)
+                                            <option @if($result->endpoint_type == $endpoint->id) selected @endif value="{{$endpoint->id}}">{{$endpoint->name}}</option>
+                                        @endforeach
+                                    </select>
 
-                                <input name="endpoint_result" value="{{$trail->endpoint_result}}" required class="form-control wd100" type="text" placeholder="Endpoint result" >
-                                <div  class="form-group">
-                                    <p>Statistical Significance</p>
-                                </div>
-                                <p class="text-center">
-                                    @if($trail->statistical_significance == 'Significant')
-                                        <label style="text-align:center; width:48%">
-                                            <input type="radio" checked name="statistical_significance" value="Significant" id="randomization_0">
-                                            Significant</label>
-                                        <label style="text-align:center; width:48%">
-                                            <input type="radio" name="statistical_significance" value="Non" id="randomization_1">
-                                            Non</label>
-                                    @else
-                                        <label style="text-align:center; width:48%">
-                                            <input type="radio" name="statistical_significance" value="Significant" id="randomization_0">
-                                            Significant</label>
-                                        <label style="text-align:center; width:48%">
-                                            <input type="radio" checked name="statistical_significance" value="Non" id="randomization_1">
-                                            Non</label>
-                                    @endif
-
-                                    <br>
-                                </p>
+                                    <input name="endpoint_result" value="{{$result->endpoint_result}}" required class="form-control wd100" type="text" placeholder="Endpoint result" >
+                                    <div  class="form-group">
+                                        <p>Statistical Significance</p>
+                                    </div>
+                                    <p class="text-center">
+                                        <select name="statistical_significance[]" style="width: 100%" class="form-control slct wdth">
+                                            <option @if($result->statistical_significance == "Significant") selected @endif value="Significant">Significant</option>
+                                            <option @if($result->statistical_significance == "Non Significant") selected @endif value="Non Significant">Non Significant</option>
+                                        </select>
+                                        <br>
+                                    </p>
+                                @endforeach
                             </div>
 
                         </div>
@@ -265,7 +249,7 @@
                                 <p style="text-align:left">Previous lines / after failure of</p>
                                 <input value="{{$trail->previous_lines}}" name="previous_lines" required class="form-control " type="text" >
                                 <p style="text-align:left">Points of criticism</p>
-                                <input value="{{$trail->points_of_criticism}}" name="points_of_criticism" required class="form-control " type="text" >
+                                <textarea name="points_of_criticism"   class="form-control wd100" >{{$trail->points_of_criticism}}</textarea>
                                 <p style="text-align:left">Link to full text</p>
                                 <input name="link_to_text" value="{{$trail->link_to_text}}" required class="form-control " type="text" >
                             </div>

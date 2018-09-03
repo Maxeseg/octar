@@ -19,6 +19,12 @@ $(function() {
             new_field_group.find('input').each(function(){
                 $(this).val('');
             });
+            new_field_group.find('textarea').each(function () {
+               $(this).val('').blur();
+            });
+            new_field_group.find("input[type='radio']").each(function () {
+                $(this).removeAttr('checked');
+            });
             container.append(new_field_group);
         }
     );
