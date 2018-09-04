@@ -69,13 +69,13 @@
                         <div class="col-md-4 col-sm-4 col-xs-12 lft">
                             <div class="form-group">
                                 <label class="wdth3">Year of publication</label>
-                                <input name="year" value="{{$trail->year}}"   class="form-control wdth4" type="number" maxlength="4" >
+                                <input name="year" value="{{$trail->year}}" min="1900"   class="form-control wdth4" type="number" maxlength="4" >
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-12 lft">
                             <div class="form-group">
                                 <label>Trial Nb</label>
-                                <input name="nb" value="{{$trail->nb}}"   class="form-control wdth" type="text" >
+                                <input name="nb" value="{{$trail->nb}}" class="form-control wdth" type="text" >
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-12 lft">
@@ -459,7 +459,14 @@
                 }
                 //append it to B
                 B.appendChild(op);
+
+                $("#B").append($("#B option").remove().sort(function(a, b) {
+                    var at = $(a).text(), bt = $(b).text();
+                    return (at > bt)?1:((at < bt)?-1:0);
+                }));
             };
+
+
             //fire this to update B on load
             A.onchange();
 

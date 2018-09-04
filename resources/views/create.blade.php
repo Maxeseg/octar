@@ -68,7 +68,7 @@
                         <div class="col-md-4 col-sm-4 col-xs-12 lft">
                             <div class="form-group">
                                 <label class="wdth3">Year of publication</label>
-                                <input name="year"   class="form-control wdth4" type="number" maxlength="4">
+                                <input name="year"   class="form-control wdth4" type="number" maxlength="4" min="1900">
 
                             </div>
                         </div>
@@ -320,20 +320,13 @@
 
             //on change is a good event for this because you are guarenteed the value is different
             A.onchange = function() {
+               // code ajax
+
                 //clear out B
                 B.length = 0;
                 //get the selected value from A
                 var _val = this.options[this.selectedIndex].value;
 
-                var op = document.createElement('option');
-                //set its value
-                op.value = "non";
-                //set the display label
-                op.text = "Non";
-                //set the selected to true
-                op.selected = true;
-                //append it to B
-                B.appendChild(op);
 
                 for (var i in bOptions[_val]) {
                     //create option tag
@@ -344,9 +337,26 @@
                     op.text = bOptions[_val][i].name;
                     //append it to B
                     B.appendChild(op);
+
                 }
+
+                $("#B").append($("#B option").remove().sort(function(a, b) {
+                    var at = $(a).text(), bt = $(b).text();
+                    return (at > bt)?1:((at < bt)?-1:0);
+                }));
+
+                var op = document.createElement('option');
+                //set its value
+                op.value = "non";
+                //set the display label
+                op.text = "Non";
+                //set the selected to true
+                op.selected = true;
+                //append it to B
+                B.appendChild(op);
                 //create SomeThing Else option tag
             };
+
 
             //fire this to update B on load
             A.onchange();
